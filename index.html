@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tic-Tac-Toe | Modern Edition</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="background-decorations">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+  </div>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <main class="game-container">
+    <header class="game-header">
+      <h1 class="title">TIC <span class="accent-text">TAC</span> TOE</h1>
+      <p class="subtitle">Play against a friend or challenge the AI</p>
+    </header>
+
+    <!-- Controls & Settings -->
+    <section class="controls-panel">
+      <div class="control-group">
+        <label for="mode-select">Game Mode</label>
+        <select id="mode-select" class="custom-select">
+          <option value="pvp">👥 2 Players (Local)</option>
+          <option value="pve-easy">🤖 AI (Easy)</option>
+          <option value="pve-hard" selected>🧠 AI (Unbeatable)</option>
+        </select>
+      </div>
+
+      <button id="sound-btn" class="icon-btn" aria-label="Toggle Sound" title="Toggle Sound">
+        <span id="sound-icon">🔊</span>
+      </button>
+    </section>
+
+    <!-- Score Board -->
+    <section class="scoreboard">
+      <div class="score-card player-x">
+        <span class="player-label">PLAYER (X)</span>
+        <span class="score-value" id="score-x">0</span>
+      </div>
+      <div class="score-card ties">
+        <span class="player-label">TIES</span>
+        <span class="score-value" id="score-ties">0</span>
+      </div>
+      <div class="score-card player-o">
+        <span class="player-label" id="label-o">AI (O)</span>
+        <span class="score-value" id="score-o">0</span>
+      </div>
+    </section>
+
+    <!-- Status Announcement -->
+    <div class="status-banner" id="status-text">
+      <span class="turn-indicator x-turn">Player X's turn</span>
+    </div>
+
+    <!-- 3x3 Grid -->
+    <div class="board" id="board" role="grid" aria-label="Tic-Tac-Toe Board">
+      <button class="cell" data-index="0" aria-label="Cell 1"></button>
+      <button class="cell" data-index="1" aria-label="Cell 2"></button>
+      <button class="cell" data-index="2" aria-label="Cell 3"></button>
+      <button class="cell" data-index="3" aria-label="Cell 4"></button>
+      <button class="cell" data-index="4" aria-label="Cell 5"></button>
+      <button class="cell" data-index="5" aria-label="Cell 6"></button>
+      <button class="cell" data-index="6" aria-label="Cell 7"></button>
+      <button class="cell" data-index="7" aria-label="Cell 8"></button>
+      <button class="cell" data-index="8" aria-label="Cell 9"></button>
+    </div>
+
+    <!-- Action Buttons -->
+    <footer class="action-footer">
+      <button id="reset-round-btn" class="btn btn-primary">Next Round</button>
+      <button id="restart-game-btn" class="btn btn-secondary">Reset Scores</button>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
