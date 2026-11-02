@@ -31,7 +31,7 @@
 
 body {
   font-family: var(--font-family);
-  background-color: var(--bg-primary);
+  background: radial-gradient(circle at center, #1e293b 0%, var(--bg-primary) 100%);
   color: var(--text-main);
   min-height: 100vh;
   display: flex;
@@ -56,6 +56,7 @@ body {
   border-radius: 50%;
   filter: blur(100px);
   opacity: 0.25;
+  animation: floatOrb 8s ease-in-out infinite alternate;
 }
 
 .orb-1 {
@@ -64,6 +65,7 @@ body {
   background: var(--color-x);
   top: -80px;
   left: -80px;
+  animation-duration: 10s;
 }
 
 .orb-2 {
@@ -72,6 +74,19 @@ body {
   background: var(--color-o);
   bottom: -100px;
   right: -100px;
+  animation-duration: 12s;
+}
+
+@keyframes floatOrb {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, 30px) scale(1.05);
+  }
+  100% {
+    transform: translate(-10px, -20px) scale(0.95);
+  }
 }
 
 #confetti-canvas {
@@ -89,16 +104,31 @@ body {
   z-index: 10;
   width: 100%;
   max-width: 440px;
-  background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-color);
+  background: rgba(30, 41, 59, 0.55);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-lg);
   padding: 2rem 1.75rem;
-  box-shadow: var(--shadow-main);
+  box-shadow:
+    var(--shadow-main),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  animation: containerEntry 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes containerEntry {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* Header */
@@ -110,6 +140,7 @@ body {
   font-size: 2.1rem;
   font-weight: 800;
   letter-spacing: 2px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .accent-text {
@@ -289,12 +320,14 @@ body {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .cell:hover:not(:disabled) {
-  background: var(--bg-cell-hover);
+  background: rgba(71, 85, 105, 0.9);
   transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4), inset 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .cell:active:not(:disabled) {
@@ -308,13 +341,13 @@ body {
 /* Cell Marks */
 .cell.x {
   color: var(--color-x);
-  text-shadow: 0 0 15px var(--color-x-glow);
+  text-shadow: 0 0 20px var(--color-x-glow), 0 0 40px var(--color-x-glow);
   animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .cell.o {
   color: var(--color-o);
-  text-shadow: 0 0 15px var(--color-o-glow);
+  text-shadow: 0 0 20px var(--color-o-glow), 0 0 40px var(--color-o-glow);
   animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -345,26 +378,35 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #0284c7, #2563eb);
+  background: linear-gradient(270deg, #0284c7, #2563eb, #0284c7);
+  background-size: 200% 200%;
   color: #fff;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+  animation: gradientShift 4s ease infinite;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #0369a1, #1d4ed8);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.6);
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .btn-secondary {
   background: rgba(15, 23, 42, 0.6);
   border: 1px solid var(--border-color);
   color: var(--text-muted);
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.05);
 }
 
 .btn-secondary:hover {
-  background: rgba(51, 65, 85, 0.5);
+  background: rgba(51, 65, 85, 0.8);
   color: var(--text-main);
+  border-color: rgba(148, 163, 184, 0.3);
 }
 
 .btn:active {
